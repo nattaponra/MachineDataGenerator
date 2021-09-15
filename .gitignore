@@ -1,0 +1,16 @@
+# Goreload binary
+.goreload
+.goreload.exe
+
+# JetBrain config.
+.idea
+
+/upload
+node_modules
+coverage.out
+
+# Go dependency packages
+/vendor
+
+docs/swagger.*
+
