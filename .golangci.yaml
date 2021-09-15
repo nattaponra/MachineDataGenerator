@@ -1,0 +1,61 @@
+issues:
+  max-issues-per-linter: 0 # Set to 0 to disable.
+  fix: true
+linters-settings:
+  gocognit:
+    min-complexity: 10
+  gocyclo:
+    min-complexity: 10
+  gofumpt:
+    extra-rules: true
+  gomnd:
+    settings:
+      mnd:
+        checks:
+          - case
+          - condition
+          - return
+  nestif:
+    min-complexity: 4
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+  tagliatelle:
+    case:
+      use-field-name: true
+      rules:
+        - json: camel
+        - bson: lower
+linters:
+  enable:
+    - asciicheck
+    - dogsled
+    - durationcheck
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forbidigo
+    - goconst
+    - gocritic
+    - goimports
+    - gofumpt
+    - gomnd
+    - gomoddirectives
+    - goprintffuncname
+    - gosec
+    - ifshort
+    - importas
+    - makezero
+    - misspell
+    - nakedret
+    - nilerr
+    - noctx
+    - predeclared
+    - revive
+    - tagliatelle
+    - testpackage
+    - unconvert
+    - unparam
+    - wrapcheck
+    - wsl
+
