@@ -1,7 +1,5 @@
 # MachineDataGenerator
 
----
-
 ![Tag](https://img.shields.io/github/v/tag/ifraiot/MachineDataGenerator)
 ![Last commit date](https://img.shields.io/github/last-commit/ifraiot/MachineDataGenerator)
 ![Go version](https://img.shields.io/github/go-mod/go-version/ifraiot/MachineDataGenerator)
@@ -16,15 +14,11 @@ It must do something. 🤔
 
 ## Prerequisites
 
----
-
 Before installing `MachineDataGenerator` you need:
 
 - Git
 - Go >=1.16
 
 ## Support
-
----
 
 Thitiwut Chutipongwanit - thitiwut@ifrasoft.com
