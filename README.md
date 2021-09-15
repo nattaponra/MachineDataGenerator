@@ -17,7 +17,7 @@ It must do something. 🤔
 Before installing `MachineDataGenerator` you need:
 
 - Git
-- Go >=1.16
+- Go 1.16+
 
 ## Support
 
