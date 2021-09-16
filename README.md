@@ -95,7 +95,7 @@ If `.env` file is found, MachineDataGenerator load it to shell environment.
 
 `MDG_BROKER_URL`
 
-Source MQTT broker URL.
+MQTT broker URL.
 
 The format should be `scheme://host:port`Where
 `scheme` is one of "tcp", "ssl", or "ws",
