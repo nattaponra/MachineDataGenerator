@@ -81,6 +81,11 @@ func main() {
 	for i := 0; i < len(devConfs); i++ {
 		conf := devConfs[i]
 
+		var (
+			qos      byte = 2
+			retained bool
+		)
+
 		go func() {
 			opts := mqtt.NewClientOptions().
 				AddBroker(brokerURL).
@@ -143,11 +148,20 @@ func main() {
 			Start:
 				for _, msg := range stMsgs {
 					ifraMsg := []IfraMessage{msg}
+					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					token := mqttClient.Publish(conf.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish status message failed")
 					}
+
+					log.Info().
+						Str("to", brokerURL).
+						Str("topic", conf.Topic).
+						Uint8("qos", qos).
+						Bool("retained", retained).
+						RawJSON("msg", m).
+						Msg("Publish MQTT message")
 
 					time.Sleep(time.Second)
 				}
@@ -160,11 +174,20 @@ func main() {
 			Start:
 				for _, msg := range opMsgs {
 					ifraMsg := []IfraMessage{msg}
+					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					token := mqttClient.Publish(conf.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish output message failed")
 					}
+
+					log.Info().
+						Str("to", brokerURL).
+						Str("topic", conf.Topic).
+						Uint8("qos", qos).
+						Bool("retained", retained).
+						RawJSON("msg", m).
+						Msg("Publish MQTT message")
 
 					time.Sleep(time.Second)
 				}
@@ -177,11 +200,20 @@ func main() {
 			Start:
 				for _, msg := range ropMsgs {
 					ifraMsg := []IfraMessage{msg}
+					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					token := mqttClient.Publish(conf.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish reject output message failed")
 					}
+
+					log.Info().
+						Str("to", brokerURL).
+						Str("topic", conf.Topic).
+						Uint8("qos", qos).
+						Bool("retained", retained).
+						RawJSON("msg", m).
+						Msg("Publish MQTT message")
 
 					time.Sleep(time.Second)
 				}
