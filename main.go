@@ -89,13 +89,15 @@ func main() {
 			Msg("Unmarshal failed")
 	}
 
+	var (
+		qos      byte = 2
+		retained bool
+	)
+
+	publInterval := time.Minute
+
 	for i := 0; i < len(publishers); i++ {
 		publisher := publishers[i]
-
-		var (
-			qos      byte = 2
-			retained bool
-		)
 
 		go func() {
 			opts := mqtt.NewClientOptions().
@@ -174,7 +176,7 @@ func main() {
 						RawJSON("msg", m).
 						Msg("Publish MQTT message")
 
-					time.Sleep(time.Second)
+					time.Sleep(publInterval)
 				}
 
 				goto Start
@@ -200,7 +202,7 @@ func main() {
 						RawJSON("msg", m).
 						Msg("Publish MQTT message")
 
-					time.Sleep(time.Second)
+					time.Sleep(publInterval)
 				}
 
 				goto Start
@@ -226,7 +228,7 @@ func main() {
 						RawJSON("msg", m).
 						Msg("Publish MQTT message")
 
-					time.Sleep(time.Second)
+					time.Sleep(publInterval)
 				}
 
 				goto Start
