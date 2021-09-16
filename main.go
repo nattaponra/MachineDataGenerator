@@ -10,7 +10,7 @@ func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 
 	brokerURL := "tcp://staging.mqtt.ifra.io:1883"
-	//topic := "organization/93d818ed-ea26-4ccf-a9ef-e1852197e96f/messages"
+	topic := "organization/93d818ed-ea26-4ccf-a9ef-e1852197e96f/messages"
 	username := "ecbe49d1-8b2d-4f16-afb4-3e323a74d214"
 	password := "5b76e53f-24a1-485b-8284-d55eef426234"
 
@@ -25,5 +25,12 @@ func main() {
 			Err(token.Error()).
 			Str("url", brokerURL).
 			Msg("Connect to source MQTT broker failed")
+	}
+
+	token := mqttClient.Publish(topic, 2, false, nil)
+	if token.Wait() && token.Error() != nil {
+		log.Error().
+			Err(token.Error()).
+			Msg("Publish MQTT message failed")
 	}
 }
