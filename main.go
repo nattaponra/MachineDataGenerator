@@ -194,10 +194,17 @@ func main() {
 			signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 
 			// Abort the program upon receiving an interruption signal.
-			s := <-c
-			log.Info().Msgf("Received %s signal. Aborting", s)
+			<-c
 
 			mqttClient.Disconnect(250)
 		}()
 	}
+
+	// Make the program keep running until receive an interruption signal.
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+
+	// Abort the program upon receiving an interruption signal.
+	s := <-c
+	log.Info().Msgf("Received %s signal. Aborting", s)
 }
