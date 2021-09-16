@@ -6,7 +6,7 @@
 ![Repo size](https://img.shields.io/github/repo-size/ifraiot/MachineDataGenerator)
 ![Contributor](https://img.shields.io/github/contributors/ifraiot/MachineDataGenerator)
 
-Project URL: [https://github.com/ifraiot/MachineDataGenerator](https://github.com/ifraiot/MachineDataGenerator)
+Project repo: [https://github.com/ifraiot/MachineDataGenerator](https://github.com/ifraiot/MachineDataGenerator)
 
 By Thitiwut Chutipongwanit
 
