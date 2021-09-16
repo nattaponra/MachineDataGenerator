@@ -21,7 +21,7 @@ Before installing `MachineDataGenerator` you need:
 
 ## Quick start
 
-Set environment variables in .env file
+Set environment variables in .env file.
 
 ```shell
 cat .env
@@ -34,7 +34,7 @@ MDG_BROKER_URL=<MQTT BROKER URL>
 Set publisher configurations.
 
 ```shell
-cat ./data/publishers.json
+cat data/publishers.json
 ```
 
 ```json
