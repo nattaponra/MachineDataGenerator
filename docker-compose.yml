@@ -1,0 +1,7 @@
+version: '2'
+services:
+  app:
+    image: ifrasoft/machine-data-generator
+    environment:
+      # Broker URL for message publication.
+      - MDG_BROKER_URL
