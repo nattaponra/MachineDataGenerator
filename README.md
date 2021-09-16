@@ -6,7 +6,7 @@
 ![Repo size](https://img.shields.io/github/repo-size/ifraiot/MachineDataGenerator)
 ![Contributor](https://img.shields.io/github/contributors/ifraiot/MachineDataGenerator)
 
-Project URL: [https://github.com/ifraiot/MachineDataGenerator](https://github.com/ifraiot/MachineDataGenerator)
+Project repo: [https://github.com/ifraiot/MachineDataGenerator](https://github.com/ifraiot/MachineDataGenerator)
 
 By Thitiwut Chutipongwanit
 
@@ -69,7 +69,7 @@ Usage: machine-data-generator
 
 `publishers.json` must be located at
 `<PROJECT ROOT DIRECTORY>/data/publishers.json` in order for
-MachineDataGenerator to be able to work properly.
+MachineDataGenerator to work properly.
 
 Format
 
