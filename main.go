@@ -56,17 +56,17 @@ func main() {
 		} else {
 			log.Fatal().
 				Err(err).
-				Msg("Load .env file failed")
+				Msg("Read .env file failed")
 		}
 	}
 
 	brokerURL := os.Getenv("MDG_BROKER_URL")
 
-	bytePublConfs, err := ioutil.ReadFile("publishers.json")
+	bytePublConfs, err := ioutil.ReadFile("data/publishers.json")
 	if err != nil {
 		log.Fatal().
 			Err(err).
-			Msg("Load publishers.json file failed")
+			Msg("Read publishers.json file failed")
 	}
 
 	var publishers []Publisher
