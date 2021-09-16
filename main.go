@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"flag"
+	"fmt"
 	"io/fs"
 	"io/ioutil"
 	"os"
@@ -45,6 +47,15 @@ type IfraMessage struct {
 }
 
 func main() {
+	// Customize usage.
+	flag.Usage = func() {
+		//nolint:forbidigo // Print usage.
+		fmt.Printf("Usage: machine-data-generator")
+		flag.PrintDefaults()
+	}
+
+	flag.Parse()
+
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 
 	err := godotenv.Load()
