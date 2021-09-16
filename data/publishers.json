@@ -1,0 +1,82 @@
+[
+  {
+    "username": "247c22dc-f9d4-4be6-819b-716bccdfc034",
+    "password": "217ae08d-f8b9-4ffe-8ca7-4aa253a35e33",
+    "jsonOpPath": "data/d1_op.json",
+    "jsonRopPath": "data/d1_rop.json",
+    "jsonStPath": "data/d1_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "129c0839-dcd9-416a-bf7f-7da94b920339",
+    "password": "bb7e8c16-2c72-4e5d-a00e-0fdc610dbf09",
+    "jsonOpPath": "data/d2_op.json",
+    "jsonRopPath": "data/d2_rop.json",
+    "jsonStPath": "data/d2_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "81aeab3a-860a-4baa-98df-bf7b86402452",
+    "password": "1cc127ee-b280-488f-89a4-587a42e32917",
+    "jsonOpPath": "data/d3_op.json",
+    "jsonRopPath": "data/d3_rop.json",
+    "jsonStPath": "data/d3_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "3aad4141-d5e8-4894-8ab8-11fce62007e1",
+    "password": "35f6f7ca-4a1b-4256-8cd8-3e7fdd16ea5c",
+    "jsonOpPath": "data/d4_op.json",
+    "jsonRopPath": "data/d4_rop.json",
+    "jsonStPath": "data/d4_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "853e2505-e5f2-4bb6-8ea8-9c1589ef6d13",
+    "password": "a0e2ae76-7828-401e-8693-9f18815d650f",
+    "jsonOpPath": "data/d5_op.json",
+    "jsonRopPath": "data/d5_rop.json",
+    "jsonStPath": "data/d5_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "226820dc-fa25-44e2-ab99-9f1523eeb098",
+    "password": "1f1b3223-aa31-45e3-a2eb-cfe7d7998c41",
+    "jsonOpPath": "data/d6_op.json",
+    "jsonRopPath": "data/d6_rop.json",
+    "jsonStPath": "data/d6_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "7867eb64-3376-411e-82d3-f021aafc32a0",
+    "password": "08eb9bc7-a426-407b-85fd-3186f7a90ddd",
+    "jsonOpPath": "data/d7_op.json",
+    "jsonRopPath": "data/d7_rop.json",
+    "jsonStPath": "data/d7_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "7d679f92-75e7-49b4-920a-e6ae4cfb34e3",
+    "password": "8c9fda6c-0fe8-4920-9377-911e31ee1c7e",
+    "jsonOpPath": "data/d8_op.json",
+    "jsonRopPath": "data/d8_rop.json",
+    "jsonStPath": "data/d8_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "78de5e24-dac0-4c29-853b-4d4ed410fd0e",
+    "password": "2f2cf7f4-23b8-4837-bf2f-dfabf818cdf7",
+    "jsonOpPath": "data/d9_op.json",
+    "jsonRopPath": "data/d9_rop.json",
+    "jsonStPath": "data/d9_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  },
+  {
+    "username": "df689069-1e0f-471e-9ae6-1c5049f936da",
+    "password": "820d63c0-0c9a-4a62-8143-d4ed6bfa6d7a",
+    "jsonOpPath": "data/d10_op.json",
+    "jsonRopPath": "data/d10_rop.json",
+    "jsonStPath": "data/d10_st.json",
+    "topic": "organization/0b323bdc-61fe-4aaa-9bc9-7afb17575bf2/messages"
+  }
+]

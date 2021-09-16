@@ -1,0 +1,5 @@
+README.md
+.pre-commit-config.yaml
+.golangci.yaml
+.gitignore
+data
