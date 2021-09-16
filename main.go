@@ -16,8 +16,8 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-// DeviceConfig represents device configuration.
-type DeviceConfig struct {
+// Publisher represents publisher configuration.
+type Publisher struct {
 	// Username aka device_id
 	Username string
 
@@ -62,24 +62,24 @@ func main() {
 
 	brokerURL := os.Getenv("MDG_BROKER_URL")
 
-	byteDevConfs, err := ioutil.ReadFile("device-configs.json")
+	bytePublConfs, err := ioutil.ReadFile("publishers.json")
 	if err != nil {
 		log.Fatal().
 			Err(err).
-			Msg("Load device-configs.json file failed")
+			Msg("Load publishers.json file failed")
 	}
 
-	var devConfs []DeviceConfig
+	var publishers []Publisher
 
-	err = json.Unmarshal(byteDevConfs, &devConfs)
+	err = json.Unmarshal(bytePublConfs, &publishers)
 	if err != nil {
 		log.Fatal().
 			Err(err).
 			Msg("Unmarshal failed")
 	}
 
-	for i := 0; i < len(devConfs); i++ {
-		conf := devConfs[i]
+	for i := 0; i < len(publishers); i++ {
+		publisher := publishers[i]
 
 		var (
 			qos      byte = 2
@@ -89,25 +89,25 @@ func main() {
 		go func() {
 			opts := mqtt.NewClientOptions().
 				AddBroker(brokerURL).
-				SetUsername(conf.Username).
-				SetPassword(conf.Password).
-				SetClientID(conf.Username)
+				SetUsername(publisher.Username).
+				SetPassword(publisher.Password).
+				SetClientID(publisher.Username)
 			mqttClient := mqtt.NewClient(opts)
 
 			log.Info().
 				Str("url", brokerURL).
-				Str("username", conf.Username).
+				Str("username", publisher.Username).
 				Msg("Connect to MQTT broker")
 
 			if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
 				log.Fatal().
 					Err(token.Error()).
 					Str("url", brokerURL).
-					Str("username", conf.Username).
+					Str("username", publisher.Username).
 					Msg("Connect to MQTT broker failed")
 			}
 
-			byteStMsgs, err := ioutil.ReadFile(conf.JSONStPath)
+			byteStMsgs, err := ioutil.ReadFile(publisher.JSONStPath)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Read status messages file failed")
 			}
@@ -119,7 +119,7 @@ func main() {
 				log.Fatal().Err(err).Msg("Unmarshal status messages failed")
 			}
 
-			byteOpMsgs, err := ioutil.ReadFile(conf.JSONOpPath)
+			byteOpMsgs, err := ioutil.ReadFile(publisher.JSONOpPath)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Read output messages file failed")
 			}
@@ -131,7 +131,7 @@ func main() {
 				log.Fatal().Err(err).Msg("Unmarshal output messages failed")
 			}
 
-			byteRopMsgs, err := ioutil.ReadFile(conf.JSONRopPath)
+			byteRopMsgs, err := ioutil.ReadFile(publisher.JSONRopPath)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Read reject output messages file failed")
 			}
@@ -150,14 +150,14 @@ func main() {
 					ifraMsg := []IfraMessage{msg}
 					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, qos, retained, m)
+					token := mqttClient.Publish(publisher.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish status message failed")
 					}
 
 					log.Info().
 						Str("to", brokerURL).
-						Str("topic", conf.Topic).
+						Str("topic", publisher.Topic).
 						Uint8("qos", qos).
 						Bool("retained", retained).
 						RawJSON("msg", m).
@@ -176,14 +176,14 @@ func main() {
 					ifraMsg := []IfraMessage{msg}
 					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, qos, retained, m)
+					token := mqttClient.Publish(publisher.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish output message failed")
 					}
 
 					log.Info().
 						Str("to", brokerURL).
-						Str("topic", conf.Topic).
+						Str("topic", publisher.Topic).
 						Uint8("qos", qos).
 						Bool("retained", retained).
 						RawJSON("msg", m).
@@ -202,14 +202,14 @@ func main() {
 					ifraMsg := []IfraMessage{msg}
 					m, _ := json.Marshal(ifraMsg)
 
-					token := mqttClient.Publish(conf.Topic, qos, retained, m)
+					token := mqttClient.Publish(publisher.Topic, qos, retained, m)
 					if token.Wait() && token.Error() != nil {
 						log.Error().Err(token.Error()).Msg("Publish reject output message failed")
 					}
 
 					log.Info().
 						Str("to", brokerURL).
-						Str("topic", conf.Topic).
+						Str("topic", publisher.Topic).
 						Uint8("qos", qos).
 						Bool("retained", retained).
 						RawJSON("msg", m).
