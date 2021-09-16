@@ -3,16 +3,17 @@ package main
 import (
 	"encoding/json"
 	"errors"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
-	"github.com/joho/godotenv"
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 	"io/fs"
 	"io/ioutil"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	mqtt "github.com/eclipse/paho.mqtt.golang"
+	"github.com/joho/godotenv"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
 // DeviceConfig represents device configuration.
@@ -36,11 +37,11 @@ type DeviceConfig struct {
 	Topic string
 }
 
-// Message represents message schema.
-type Message struct {
-	Name  string    `json:"name"`
-	Value float64   `json:"value"`
-	Time  time.Time `json:"time"`
+// IfraMessage represents Ifra MQTT broker compatible message.
+type IfraMessage struct {
+	N string  `json:"n"`
+	V float64 `json:"v"`
+	U string  `json:"u"`
 }
 
 func main() {
@@ -106,7 +107,7 @@ func main() {
 				log.Fatal().Err(err).Msg("Read status messages file failed")
 			}
 
-			var stMsgs []Message
+			var stMsgs []IfraMessage
 
 			err = json.Unmarshal(byteStMsgs, &stMsgs)
 			if err != nil {
@@ -118,31 +119,75 @@ func main() {
 				log.Fatal().Err(err).Msg("Read output messages file failed")
 			}
 
-			var opMsgs []Message
+			var opMsgs []IfraMessage
 
 			err = json.Unmarshal(byteOpMsgs, &opMsgs)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Unmarshal output messages failed")
 			}
 
-			byteRopMsgs, err := ioutil.ReadFile(conf.JSONOpPath)
+			byteRopMsgs, err := ioutil.ReadFile(conf.JSONRopPath)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Read reject output messages file failed")
 			}
 
-			var ropMsgs []Message
+			var ropMsgs []IfraMessage
 
 			err = json.Unmarshal(byteRopMsgs, &ropMsgs)
 			if err != nil {
 				log.Fatal().Err(err).Msg("Unmarshal reject output messages failed")
 			}
 
-			token := mqttClient.Publish(conf.Topic, 2, false, nil)
-			if token.Wait() && token.Error() != nil {
-				log.Error().
-					Err(token.Error()).
-					Msg("Publish MQTT message failed")
-			}
+			// Publish status message.
+			go func() {
+			Start:
+				for _, msg := range stMsgs {
+					ifraMsg := []IfraMessage{msg}
+
+					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					if token.Wait() && token.Error() != nil {
+						log.Error().Err(token.Error()).Msg("Publish status message failed")
+					}
+
+					time.Sleep(time.Second)
+				}
+
+				goto Start
+			}()
+
+			// Publish output message.
+			go func() {
+			Start:
+				for _, msg := range opMsgs {
+					ifraMsg := []IfraMessage{msg}
+
+					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					if token.Wait() && token.Error() != nil {
+						log.Error().Err(token.Error()).Msg("Publish output message failed")
+					}
+
+					time.Sleep(time.Second)
+				}
+
+				goto Start
+			}()
+
+			// Publish reject output message.
+			go func() {
+			Start:
+				for _, msg := range ropMsgs {
+					ifraMsg := []IfraMessage{msg}
+
+					token := mqttClient.Publish(conf.Topic, 2, false, ifraMsg)
+					if token.Wait() && token.Error() != nil {
+						log.Error().Err(token.Error()).Msg("Publish reject output message failed")
+					}
+
+					time.Sleep(time.Second)
+				}
+
+				goto Start
+			}()
 
 			// Make the program keep running until receive an interruption signal.
 			c := make(chan os.Signal, 1)
