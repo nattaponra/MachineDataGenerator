@@ -10,7 +10,7 @@ Project URL: [https://github.com/ifraiot/MachineDataGenerator](https://github.co
 
 By Thitiwut Chutipongwanit
 
-MachineDataGenerator helps to publish MQTT message perpetually.
+MachineDataGenerator helps to publish MQTT message perpetually from multiple publishers.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ Usage: machine-data-generator
 
 `publishers.json` must be located at
 `<PROJECT ROOT DIRECTORY>/data/publishers.json` in order for
-MachineDataGenerator to be able to run.
+MachineDataGenerator to be able to work properly.
 
 Format
 
@@ -95,7 +95,7 @@ If `.env` file is found, MachineDataGenerator load it to shell environment.
 
 `MDG_BROKER_URL`
 
-Source MQTT broker URL.
+MQTT broker URL.
 
 The format should be `scheme://host:port`Where
 `scheme` is one of "tcp", "ssl", or "ws",
