@@ -10,7 +10,7 @@ Project URL: [https://github.com/ifraiot/MachineDataGenerator](https://github.co
 
 By Thitiwut Chutipongwanit
 
-MachineDataGenerator helps to publish MQTT message perpetually.
+MachineDataGenerator helps to publish MQTT message perpetually from multiple publishers.
 
 ## Prerequisites
 
