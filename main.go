@@ -52,7 +52,7 @@ func main() {
 		if errors.Is(err, fs.ErrNotExist) {
 			log.Info().
 				Err(err).
-				Msg(".env file not found. Use shell environment variables instead")
+				Msg(".env file not found. Use shell environment variables")
 		} else {
 			log.Fatal().
 				Err(err).
