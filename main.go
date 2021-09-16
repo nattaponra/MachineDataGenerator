@@ -20,11 +20,17 @@ func main() {
 		SetPassword(password)
 	mqttClient := mqtt.NewClient(opts)
 
+	log.Info().
+		Str("url", brokerURL).
+		Str("username", username).
+		Msg("Connect to MQTT broker")
+
 	if token := mqttClient.Connect(); token.Wait() && token.Error() != nil {
 		log.Fatal().
 			Err(token.Error()).
 			Str("url", brokerURL).
-			Msg("Connect to source MQTT broker failed")
+			Str("username", username).
+			Msg("Connect to MQTT broker failed")
 	}
 
 	token := mqttClient.Publish(topic, 2, false, nil)
