@@ -69,7 +69,7 @@ Usage: machine-data-generator
 
 `publishers.json` must be located at
 `<PROJECT ROOT DIRECTORY>/data/publishers.json` in order for
-MachineDataGenerator to be able to work properly.
+MachineDataGenerator to work properly.
 
 Format
 
